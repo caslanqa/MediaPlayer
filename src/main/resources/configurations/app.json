@@ -1,0 +1,62 @@
+{
+  "AWS&DEVOPS": {
+    "AWS": {
+      "Ansible": {
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      },
+      "S3":{
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      },
+      "EC2": {
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      }
+    },
+    "DEVOPS": {
+      "Windows-Server": {
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      },
+      "Network":{
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      },
+      "Linux": {
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      }
+    }
+  },
+  "FULL-STACK-JAVA-DEVELOPMENT": {
+    "Frontend": {
+      "CSS": {
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      },
+      "HTML":{
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      },
+      "Bootstrap": {
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      }
+    },
+    "Backend": {
+      "HIBERNATE": {
+        "Class-1": "1_II2eMskApO7N9QCyYjROVMvofVHiJT4",
+        "Class-2": "Link-2"
+      },
+      "SQL":{
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      },
+      "ADVANCED-JAVA": {
+        "Class-1": "Link-1",
+        "Class-2": "Link-2"
+      }
+    }
+  }
+}
