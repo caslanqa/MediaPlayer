@@ -1,4 +1,4 @@
-module com.caslandev.mediaplayer_v3 {
+module com.caslandev.mediaplayer_v4 {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
@@ -9,6 +9,6 @@ module com.caslandev.mediaplayer_v3 {
     requires com.google.api.services.drive;
 
 
-    opens com.caslandev.mediaplayer_v3 to javafx.fxml;
-    exports com.caslandev.mediaplayer_v3;
+    opens com.caslandev.mediaplayer_v4 to javafx.fxml;
+    exports com.caslandev.mediaplayer_v4;
 }

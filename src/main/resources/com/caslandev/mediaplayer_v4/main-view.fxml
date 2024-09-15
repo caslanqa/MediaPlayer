@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.caslandev.mediaplayer_v4.MainController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="6.0" prefWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="844.0" minWidth="10.0" prefWidth="833.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="844.0" minWidth="8.0" prefWidth="9.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints />
+    <RowConstraints maxHeight="579.0" minHeight="0.0" prefHeight="16.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="491.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="850.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <children>
+            <Button fx:id="btnPaylist" mnemonicParsing="false" onMouseClicked="#btnPaylist" prefHeight="35.0" prefWidth="70.0" text="Playlist" textAlignment="JUSTIFY">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnPlay" mnemonicParsing="false" onMouseClicked="#btnPlay" prefHeight="35.0" prefWidth="70.0" text="Play" textAlignment="JUSTIFY">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnStop" mnemonicParsing="false" onMouseClicked="#btnStop" prefHeight="35.0" prefWidth="70.0" text="Stop">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSlow" mnemonicParsing="false" onMouseClicked="#btnSlow" prefHeight="35.0" prefWidth="70.0" text="&lt;&lt;" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnFaster" mnemonicParsing="false" onMouseClicked="#btnFaster" prefHeight="35.0" prefWidth="70.0" text="&gt;&gt;" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="seekback10" mnemonicParsing="false" onMouseClicked="#seekback10" prefHeight="35.0" prefWidth="70.0" text="-10 sn" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="seekforward10" mnemonicParsing="false" onMouseClicked="#seekforward10" prefHeight="35.0" prefWidth="70.0" text="+10 sn" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Label fx:id="lblDuration" alignment="CENTER" onMouseClicked="#lblDuration" prefHeight="35.0" prefWidth="80.0" text="00 : 00 : 00">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="140.0" prefWidth="836.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <Slider fx:id="playerSlider" onMousePressed="#sliderPressed" prefHeight="16.0" prefWidth="635.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="10.0" right="30.0" />
+               </HBox.margin>
+            </Slider>
+            <ImageView fx:id="volumeLabel" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#volumeLabel" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../../../images/pngwing.png" />
+               </image>
+            </ImageView>
+            <Slider fx:id="volumeSlider" prefHeight="16.0" prefWidth="107.0">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Slider>
+         </children>
+      </HBox>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="832.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <center>
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <AnchorPane fx:id="loginPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <TextField fx:id="txtBoxUsername" layoutX="367.0" layoutY="172.0" prefHeight="30.0" prefWidth="160.0">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </TextField>
+            <PasswordField fx:id="txtBoxPassword" layoutX="367.0" layoutY="232.0" prefHeight="30.0" prefWidth="160.0" />
+            <Button fx:id="btnLogin" layoutX="389.0" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#btnLogin" prefHeight="30.0" prefWidth="60.0" text="Login" />
+            <Label layoutX="291.0" layoutY="178.0" text="Username">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="290.0" layoutY="236.0" text="Password">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="playlistPane" prefHeight="486.0" prefWidth="819.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <TreeView fx:id="playlistView" prefHeight="470.0" prefWidth="200.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

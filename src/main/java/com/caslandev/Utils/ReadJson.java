@@ -9,9 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ReadJson {
-    private static String getFile() {
+    public static String getFile(String fileId) {
 
-        String fileId = "1DUBzokSEa0ioT4ww9n5VzVr17pVICLAv";
         try (InputStream inputStream = GoogleDriveService.driveService.files().get(fileId).executeMediaAsInputStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
 
@@ -29,8 +28,8 @@ public class ReadJson {
         }
     }
 
-    public static JsonObject getJsonObject(){
-        String fileContent = getFile();
+    public static JsonObject getJsonObject(String fileId){
+        String fileContent = getFile(fileId);
 
         JsonObject jsonObject = JsonParser.parseString(fileContent).getAsJsonObject();
 

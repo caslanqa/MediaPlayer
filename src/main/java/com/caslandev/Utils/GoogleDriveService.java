@@ -6,9 +6,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveRequestInitializer;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
+import javafx.scene.control.Alert;
 
 public class GoogleDriveService {
 
@@ -18,13 +16,21 @@ public class GoogleDriveService {
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final String API_KEY = "AIzaSyAMi67pMAVX4eccRfzKJs01r4OnDtSGtVQ";
 
-    public static void initializeGoogleDriveService() throws IOException, GeneralSecurityException {
-        HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+    public static void initializeGoogleDriveService() {
+        try {
+            HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 
-        driveService = new Drive.Builder(httpTransport, JSON_FACTORY, null)
-                .setApplicationName(APPLICATION_NAME)
-                .setDriveRequestInitializer(new DriveRequestInitializer(API_KEY))
-                .build();
+            driveService = new Drive.Builder(httpTransport, JSON_FACTORY, null)
+                    .setApplicationName(APPLICATION_NAME)
+                    .setDriveRequestInitializer(new DriveRequestInitializer(API_KEY))
+                    .build();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("DB Connection Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Cannot connect to Google Drive Services");
+            alert.showAndWait();
+        }
     }
 }
 
