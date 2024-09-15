@@ -18,21 +18,20 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.caslandev.mediaplayer_v4.MainController">
+<GridPane fx:id="gridContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.caslandev.mediaplayer_v4.MainController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="6.0" prefWidth="10.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="844.0" minWidth="10.0" prefWidth="833.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="844.0" minWidth="8.0" prefWidth="9.0" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints />
-    <RowConstraints maxHeight="579.0" minHeight="0.0" prefHeight="16.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="491.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="579.0" minHeight="0.0" prefHeight="7.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="489.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="850.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="850.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
             <Button fx:id="btnPaylist" mnemonicParsing="false" onMouseClicked="#btnPaylist" prefHeight="35.0" prefWidth="70.0" text="Playlist" textAlignment="JUSTIFY">
                <HBox.margin>
@@ -100,7 +99,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="140.0" prefWidth="836.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <HBox alignment="CENTER_LEFT" prefHeight="140.0" prefWidth="836.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
             <Slider fx:id="playerSlider" onMousePressed="#sliderPressed" prefHeight="16.0" prefWidth="635.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
@@ -122,12 +121,12 @@
             </Slider>
          </children>
       </HBox>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="832.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <BorderPane fx:id="mediaContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="832.0" style="-fx-background-color: white; -fx-border-color: gray;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <center>
             <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <AnchorPane fx:id="loginPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <AnchorPane fx:id="loginPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <TextField fx:id="txtBoxUsername" layoutX="367.0" layoutY="172.0" prefHeight="30.0" prefWidth="160.0">
                <padding>
@@ -154,7 +153,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="playlistPane" prefHeight="486.0" prefWidth="819.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <AnchorPane fx:id="playlistPane" prefHeight="486.0" prefWidth="819.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <TreeView fx:id="playlistView" prefHeight="470.0" prefWidth="200.0" />
          </children>

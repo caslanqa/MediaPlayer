@@ -11,10 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -38,9 +39,15 @@ public class MainController implements Initializable {
     private double seekRate = 0.1;
     DecimalFormat decimalFormat = new DecimalFormat("#.0");
     boolean durationFlag = false;
+    boolean isPlayed = true;
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
 
     @FXML
     private MediaView mediaView;
+
+    @FXML
+    private BorderPane mediaContainer;
 
     @FXML
     private TextField txtBoxPassword;
@@ -90,6 +97,9 @@ public class MainController implements Initializable {
 
     @FXML
     private AnchorPane loginPane;
+
+    @FXML
+    private GridPane gridContainer;
 
 
     @FXML
@@ -148,23 +158,21 @@ public class MainController implements Initializable {
 
     @FXML
     void btnPaylist(MouseEvent event) {
-        if (!loginPane.isVisible()) {
-            if (!flag.get() && pixel.get() == 0) {
-                pixel.set(600);
+        if (!flag.get() && pixel.get() == 0) {
+            pixel.set(600);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), playlistPane);
-                tt1.setByX(pixel.get());
-                tt1.play();
-                flag.set(true);
-            } else {
-                pixel.set(-600);
+            TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), playlistPane);
+            tt1.setByX(pixel.get());
+            tt1.play();
+            flag.set(true);
+        } else {
+            pixel.set(-600);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), playlistPane);
-                tt1.setByX(pixel.get());
-                tt1.play();
-                flag.set(false);
-                pixel.set(0);
-            }
+            TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), playlistPane);
+            tt1.setByX(pixel.get());
+            tt1.play();
+            flag.set(false);
+            pixel.set(0);
         }
 
     }
@@ -172,11 +180,8 @@ public class MainController implements Initializable {
     @FXML
     void btnPlay(MouseEvent event) {
         try {
-            if (!loginPane.isVisible()) {
-                if (mediaPlayer != null) {
-                    mediaPlayer.pause();
-                    btnPlay.setText("Play");
-                }
+
+            if (media == null || mediaPlayer == null){
                 TreeItem<String> treeItem = playlistView.getSelectionModel().getSelectedItem();
 
                 String selectedVideo = String.format(baseUrl, treeItem.getValue());
@@ -187,12 +192,8 @@ public class MainController implements Initializable {
                     mediaPlayer = new MediaPlayer(media);
                     mediaView.setMediaPlayer(mediaPlayer);
 
-                    mediaView.setPreserveRatio(true);
-
-                    Scene scene = mediaView.getScene();
-                    mediaView.fitWidthProperty().bind(scene.widthProperty());
-                    mediaView.fitHeightProperty().bind(scene.heightProperty());
-
+                    mediaView.fitWidthProperty().bind(mediaContainer.widthProperty());
+                    mediaView.fitHeightProperty().bind(mediaContainer.heightProperty());
                     countForwardDuration();
 
                     mediaPlayer.setOnReady(() -> {
@@ -203,24 +204,34 @@ public class MainController implements Initializable {
 
                     mediaPlayer.play();
                     btnPlay.setText("Pause");
+                    isPlayed = true;
                 }
-                if (!flag.get() && pixel.get() == 0) {
-                    pixel.set(600);
-
-                    TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), playlistPane);
-                    tt1.setByX(pixel.get());
-                    tt1.play();
-                    flag.set(true);
-                } else {
-                    pixel.set(-600);
-
-                    TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), playlistPane);
-                    tt1.setByX(pixel.get());
-                    tt1.play();
-                    flag.set(false);
-                    pixel.set(0);
+            }else {
+                if (isPlayed) {
+                    mediaPlayer.pause();
+                    btnPlay.setText("Play");
+                    isPlayed = false;
+                }else if (!isPlayed){
+                    mediaPlayer.play();
+                    btnPlay.setText("Pause");
+                    isPlayed = true;
                 }
             }
+
+
+
+            if (flag.get() && pixel.get() != 0) {
+                pixel.set(-600);
+
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), playlistPane);
+                tt1.setByX(pixel.get());
+                tt1.play();
+                flag.set(false);
+                pixel.set(0);
+            }
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Media Player Message");
@@ -234,6 +245,7 @@ public class MainController implements Initializable {
     void btnStop(MouseEvent event) {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
+            mediaPlayer = null;
             mediaView.setMediaPlayer(null);
             btnPlay.setText("Play");
         }
@@ -256,14 +268,20 @@ public class MainController implements Initializable {
         String password = txtBoxPassword.getText();
         String deviceIp = ConfigUtil.getPublicIP();
 
-        if (jsonModel.checkLogin(username, password,deviceIp)) {
-            loginPane.setVisible(false);
-            setPlayerItemsVisibility(true);
+        if (jsonModel.checkIp(username, deviceIp)) {
+            if (jsonModel.checkCredentials(username, password)) {
+                loginPane.setVisible(false);
+                setPlayerItemsVisibility(true);
+            } else {
+                alert.setTitle("Login Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please provide valid credentials");
+                alert.showAndWait();
+            }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Login Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please provide valid credentials");
+            alert.setHeaderText("UnAuthorized Device");
+            alert.setContentText("UnAuthorized Device!!!\nPlease Contact With Service Provider");
             alert.showAndWait();
         }
     }
@@ -294,7 +312,6 @@ public class MainController implements Initializable {
                 mediaPlayer.seek(Duration.seconds(newValue.doubleValue()));
             }
         });
-
     }
 
     @FXML
@@ -372,7 +389,7 @@ public class MainController implements Initializable {
         }
     }
 
-    void setPlayerItemsVisibility(boolean flag){
+    void setPlayerItemsVisibility(boolean flag) {
         playerSlider.setVisible(flag);
         volumeSlider.setVisible(flag);
         lblDuration.setVisible(flag);

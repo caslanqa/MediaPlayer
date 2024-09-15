@@ -1,5 +1,6 @@
 package com.caslandev.Utils;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import javafx.scene.control.TreeItem;
@@ -9,14 +10,33 @@ public class JsonModel {
     String userCredentialsJson = "17wdfMQBW4_dgCYfY-f_rEqKL6m1Yz1VB";
     String treeViewJson = "1DUBzokSEa0ioT4ww9n5VzVr17pVICLAv";
 
-    public Boolean checkLogin(String username, String password,String ip) {
+    public Boolean checkCredentials(String username, String password) {
         JsonObject jsonObject = ReadJson.getJsonObject(userCredentialsJson);
-        boolean flag =false;
+        boolean flag = false;
+    
+        if (jsonObject.has(username)) {
+            JsonElement userElement = jsonObject.get(username);
+            if (userElement.isJsonArray()) {
+                JsonArray user = userElement.getAsJsonArray();
+                if (user.get(0).getAsString().equals(password)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+
+    public Boolean checkIp(String username, String ip) {
+        JsonObject jsonObject = ReadJson.getJsonObject(userCredentialsJson);
+        boolean flag = false;
 
         if (jsonObject.has(username)) {
-            String user = jsonObject.get(username).getAsString();
-            if (user.contains(password)&&user.contains(ip)) {
-                flag = true;
+            JsonElement userElement = jsonObject.get(username);
+            if (userElement.isJsonArray()) {
+                JsonArray user = userElement.getAsJsonArray();
+                if (user.get(1).getAsString().equals(ip)) {
+                    flag = true;
+                }
             }
         }
         return flag;
